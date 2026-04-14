@@ -1,12 +1,12 @@
-import { Suit, Card, PlayerState, Pile, GameState, Move } from "../types/game"
+import { Suit, Card, PlayerState, Pile, GameState, Move } from "@game/types"
 
-function initializeGame(
+export function initializeGame(
     playerIds: string[]
 ): GameState {
     throw new Error("not implemented")
 }
 
-function applyMove(
+export function applyMove(
     gameState: GameState, 
     move: Move
 ): GameState {

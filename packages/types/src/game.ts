@@ -1,4 +1,4 @@
-type Suit = "hearts" | "diamonds" | "spades" | "clubs"
+export type Suit = "hearts" | "diamonds" | "spades" | "clubs"
 
 export type Card = {
   suit: Suit

@@ -1,13 +1,13 @@
-import { Suit, Card, PlayerState, Pile, GameState, Move } from "../types/game"
+import { Suit, Card, PlayerState, Pile, GameState, Move } from "@game/types"
 
-function isValidMove(
+export function isValidMove(
     gameState: GameState, 
     move: Move
 ): boolean {
     throw new Error("not implemented")
 }
 
-function checkWin(
+export function checkWin(
     gameState: GameState
 ): string | null {
     throw new Error("not implemented")

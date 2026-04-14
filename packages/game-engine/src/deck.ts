@@ -1,6 +1,6 @@
-import { Suit, Card, PlayerState, Pile, GameState, Move } from "../../types/game"
+import { Suit, Card, PlayerState, Pile, GameState, Move } from "@game/types"
 
-function createDeck(): Card[] {
+export function createDeck(): Card[] {
     let deck: Card[] = []
     for (let i = 1; i <= 13; i++) {
         let diamond: Card = { suit: "diamonds", rank: i, id: i + "d" }
@@ -17,13 +17,13 @@ function createDeck(): Card[] {
     return deck
 }
 
-function shuffle(
+export function shuffle(
     deck: Card[]
 ): Card[] {
     throw new Error("not implemented")
 }
 
-function dealCards(
+export function dealCards(
     players: PlayerState[], 
     deck: Card[]
 ): {
