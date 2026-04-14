@@ -1,4 +1,4 @@
-import { Suit, Card, PlayerState, Pile, GameState, Move } from "../../types/game"
+import { Suit, Card, PlayerState, Pile, GameState, Move } from "../types/game"
 
 function initializeGame(
     playerIds: string[]
