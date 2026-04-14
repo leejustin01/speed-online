@@ -8,6 +8,7 @@
       "@game/game-engine": ["packages/game-engine/src/index.ts"]
     },
     "outDir": "dist",
+    "types": ["jest", "node"],
     "strict": true,
     "esModuleInterop": true
   }
