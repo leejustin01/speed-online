@@ -6,21 +6,17 @@ export type Card = {
   id: string
 }
 
-export type Pile = {
-  cards: Card[]
-}
-
 export type PlayerState = {
   hand: Card[]
-  drawPile: Pile
+  drawPile: Card[]
   id: string
   canPlay: boolean
 }
 
 export type GameState = {
   players: PlayerState[]
-  playPiles: Pile[]
-  drawPiles: Pile[]
+  playPiles: Card[][]
+  drawPiles: Card[][]
   status: "waiting" | "in_progress" | "finished"
   winner?: string
 }

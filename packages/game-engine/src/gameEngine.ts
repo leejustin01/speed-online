@@ -1,9 +1,39 @@
-import { Suit, Card, PlayerState, Pile, GameState, Move } from "@game/types"
+import { Suit, Card, PlayerState, GameState, Move } from "@game/types"
+import { createDeck, shuffle, dealCards } from "./deck"
 
 export function initializeGame(
     playerIds: string[]
 ): GameState {
-    throw new Error("not implemented")
+    if (playerIds.length !== 2) throw new Error("invalid playerIds array.")
+        
+    const player1 = initializePlayer(playerIds[0])
+    const player2 = initializePlayer(playerIds[1])
+
+    const deck = shuffle(createDeck())
+
+    const { players, drawPiles } = dealCards([player1, player2], deck)
+
+    const gameState: GameState = {
+        players: players,
+        playPiles: [[], []],
+        drawPiles: drawPiles,
+        status: "in_progress"
+    }
+
+    return gameState
+}
+
+export function initializePlayer(
+    playerId: string
+): PlayerState {
+    const player: PlayerState = {
+        hand: [],
+        drawPile: [],
+        id: playerId,
+        canPlay: true
+    }
+
+    return player
 }
 
 export function applyMove(
