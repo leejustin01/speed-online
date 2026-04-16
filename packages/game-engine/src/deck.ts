@@ -1,14 +1,29 @@
 import { Suit, Card, PlayerState, GameState, Move } from "@game/types"
 
+export function createCard(
+    rank: number,
+    suit: Suit
+): Card {
+    if (rank > 12 || rank < 0) throw new Error("createCard received an invalid rank.")
+
+    const card: Card = {
+        suit: suit,
+        rank: rank,
+        id: (rank + 1) + suit[0]
+    }
+
+    return card
+}
+
 export function createDeck(): Card[] {
-    let deck: Card[] = []
+    const deck: Card[] = []
     for (let i = 0; i < 13; i++) {
         // rank goes 0 - 12
         // id goes 1d for Ace of diamonds to 13c for king of clubs
-        let diamond: Card = { suit: "diamonds", rank: i, id: (i + 1) + "d" }
-        let heart: Card = { suit: "hearts", rank: i, id: (i + 1) + "h" }
-        let spade: Card = { suit: "spades", rank: i, id: (i + 1) + "s" }
-        let club: Card = { suit: "clubs", rank: i, id: (i + 1) + "c" }
+        const diamond = createCard(i, "diamonds")
+        const heart = createCard(i, "hearts")
+        const spade = createCard(i, "spades")
+        const club = createCard(i, "clubs")
 
         deck.push(diamond)
         deck.push(heart)
