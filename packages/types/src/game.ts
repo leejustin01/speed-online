@@ -10,7 +10,8 @@ export type PlayerState = {
   hand: Card[]
   drawPile: Card[]
   id: string
-  canPlay: boolean
+  canPlay: boolean,
+  moveCount: number
 }
 
 export type GameState = {

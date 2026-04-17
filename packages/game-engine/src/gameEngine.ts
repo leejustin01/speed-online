@@ -1,4 +1,4 @@
-import { Suit, Card, PlayerState, GameState, Move } from "@game/types"
+import { Card, PlayerState, GameState, Move } from "@game/types"
 import { createDeck, shuffle, dealCards } from "./deck"
 
 export function initializeGame(
@@ -30,7 +30,8 @@ export function initializePlayer(
         hand: [],
         drawPile: [],
         id: playerId,
-        canPlay: true
+        canPlay: true,
+        moveCount: 0
     }
 
     return player

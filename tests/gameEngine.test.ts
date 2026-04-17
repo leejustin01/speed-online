@@ -24,10 +24,14 @@ test("initializeGame generates a freshly dealt game state", () => {
     expect(gameState.status).toBe("in_progress")
 })
 
-test("initializeGame fails when given an invalid playerIds array", () => {
-    const ids1: string[] = []
-    const ids2 = ["test1", "test2", "test3"]
+test("initializeGame fails when given an empty playerIds array", () => {
+    const ids: string[] = []
 
-    expect(() => { initializeGame(ids1) }).toThrow()
-    expect(() => { initializeGame(ids2) }).toThrow()
+    expect(() => { initializeGame(ids) }).toThrow()
+})
+
+test("initializeGame fails when given a 3-length playerIds array", () => {
+    const ids = ["test1", "test2", "test3"]
+
+    expect(() => { initializeGame(ids) }).toThrow()
 })
