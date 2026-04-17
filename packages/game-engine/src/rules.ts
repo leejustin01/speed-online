@@ -47,7 +47,7 @@ export function checkWin(
     gameState: GameState
 ): string | null {
     const p1Finished = gameState.players[0].hand.length <= 0 && gameState.players[0].drawPile.length <= 0
-    const p2Finished = gameState.players[1].hand.length <= 0 && gameState.players[0].drawPile.length <= 0
+    const p2Finished = gameState.players[1].hand.length <= 0 && gameState.players[1].drawPile.length <= 0
 
     if (p1Finished && p2Finished) throw new Error("Both players have no cards left.")
 
