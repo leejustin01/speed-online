@@ -10,8 +10,7 @@ export type PlayerState = {
   hand: Card[]
   drawPile: Card[]
   id: string
-  canPlay: boolean,
-  moveCount: number
+  canPlay: boolean
 }
 
 export type GameState = {
@@ -23,6 +22,12 @@ export type GameState = {
 }
 
 export type Move =
-  | { type: "PLAY_CARD"; playerId: string; cardId: string; pileIndex: number }
-  | { type: "DRAW_CARD"; playerId: string }
-  | { type: "CANNOT_PLAY"; playerId: string }
+  | { type: "PLAY_CARD"; playerIndex: number; cardId: string; pileIndex: number }
+  | { type: "DRAW_CARD"; playerIndex: number }
+  | { type: "CANNOT_PLAY"; playerIndex: number }
+
+export type PlayCardMove = Extract<Move, { type: "PLAY_CARD" }>
+export type DrawCardMove = Extract<Move, { type: "DRAW_CARD" }>
+export type CannotPlayMove = Extract<Move, { type: "CANNOT_PLAY" }>
+
+export type Message = "INVALID_MOVE" | "FLIP_CARDS" |"SUCCESSFUL_MOVE" | "GAME_OVER"

@@ -5,7 +5,8 @@
     "baseUrl": ".",
     "paths": {
       "@game/types": ["packages/types/src/index.ts"],
-      "@game/game-engine": ["packages/game-engine/src/index.ts"]
+      "@game/game-engine": ["packages/game-engine/src/index.ts"],
+      "@game/simulation": ["packages/simulation/src/index.ts"]
     },
     "outDir": "dist",
     "types": ["jest", "node"],

@@ -1,6 +1,6 @@
 // tests/engine.test.ts
 import { createCard, createDeck, shuffle, dealCards } from "../packages/game-engine/src/deck"
-import { initializePlayer } from "@game/game-engine"
+import { initializePlayer } from "../packages/game-engine/src/gameEngine"
 import { PlayerState } from "@game/types"
 
 test("createCard generates a card with correctly populated properties", () => {
