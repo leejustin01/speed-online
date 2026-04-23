@@ -1,5 +1,6 @@
 import { isValidMove, checkWin } from "../packages/game-engine/src/rules"
-import { initializeGame, initializePlayer } from "@game/game-engine"
+import { initializeGame } from "@game/game-engine"
+import { initializePlayer } from "../packages/game-engine/src/gameEngine"
 import { Card, PlayerState, GameState, Move } from "@game/types"
 import { createCard } from "../packages/game-engine/src/deck"
 
@@ -15,7 +16,7 @@ test("isValidMove returns true for playing an ace on a two", () => {
 
     const playAceOnTwo: Move = {
         type: "PLAY_CARD",
-        playerId: "p1",
+        playerIndex: 0,
         cardId: "1d",
         pileIndex: 0
     }
@@ -34,7 +35,7 @@ test("isValidMove returns true for playing an ace on a king", () => {
 
     const playAceOnKing: Move = {
         type: "PLAY_CARD",
-        playerId: "p1",
+        playerIndex: 0,
         cardId: "1d",
         pileIndex: 1
     }
@@ -53,7 +54,7 @@ test("isValidMove returns false for playing an ace on a 3", () => {
 
     const playAceOnThree: Move = {
         type: "PLAY_CARD",
-        playerId: "p1",
+        playerIndex: 0,
         cardId: "1d",
         pileIndex: 1
     }
@@ -72,7 +73,7 @@ test("isValidMove returns false for playing an ace on a queen", () => {
 
     const playAceOnQueen: Move = {
         type: "PLAY_CARD",
-        playerId: "p2",
+        playerIndex: 1,
         cardId: "1d",
         pileIndex: 1
     }
@@ -87,7 +88,7 @@ test("isValidMove returns true for drawing when a player's hand size is < 5", ()
 
     const draw: Move = {
         type: "DRAW_CARD",
-        playerId: "p1"
+        playerIndex: 0
     }
 
     game.players[0].hand = []
@@ -104,7 +105,7 @@ test("isValidMove returns false for drawing when a player's hand size is >= 5", 
 
     const draw: Move = {
         type: "DRAW_CARD",
-        playerId: "p1"
+        playerIndex: 0
     }
 
     expect(isValidMove(game, draw)).toBe(false)
@@ -118,7 +119,7 @@ test("isValidMove returns true for the 'cannot play' action", () => {
 
     const cannotPlay: Move = {
         type: "CANNOT_PLAY",
-        playerId: "p1"
+        playerIndex: 0
     }
 
     expect(isValidMove(game, cannotPlay)).toBe(true)
@@ -129,14 +130,14 @@ test("isValidMove returns false if the player does not exist", () => {
 
     const play: Move = {
         type: "PLAY_CARD",
-        playerId: "DOES_NOT_EXIST",
+        playerIndex: -1,
         cardId: "1c",
         pileIndex: 0
     }
 
     const draw: Move = {
         type: "DRAW_CARD",
-        playerId: "DOES_NOT_EXIST"
+        playerIndex: -1
     }
 
     expect(isValidMove(game, play)).toBe(false)
@@ -148,7 +149,7 @@ test("isValidMove returns false if the card being played does not exist", () => 
 
     const play: Move = {
         type: "PLAY_CARD",
-        playerId: "p1",
+        playerIndex: 0,
         cardId: "DOES_NOT_EXIST",
         pileIndex: 0
     }
@@ -163,7 +164,7 @@ test("isValidMove returns false if the play pile does not exist", () => {
 
     const play: Move = {
         type: "PLAY_CARD",
-        playerId: "p1",
+        playerIndex: 0,
         cardId: "1c",
         pileIndex: -1
     }
@@ -179,9 +180,21 @@ test("isValidMove returns false if the player's canPlay property is false", () =
 
     const play: Move = {
         type: "PLAY_CARD",
-        playerId: "p1",
+        playerIndex: 0,
         cardId: "1c",
         pileIndex: 0
+    }
+
+    expect(isValidMove(game, play)).toBe(false)
+})
+
+test("isValidMove returns false for CANNOT_PLAY if player already cannot play", () => {
+    const game = initializeGame(["p1", "p2"])
+    game.players[0].canPlay = false
+
+    const play: Move = {
+        type: "CANNOT_PLAY",
+        playerIndex: 0,
     }
 
     expect(isValidMove(game, play)).toBe(false)
@@ -205,10 +218,10 @@ test("checkWin returns player2's id when player2 is out of cards", () => {
     expect(checkWin(game)).toBe("p2")
 })
 
-test("checkWin returns null when both players have cards", () => {
+test("checkWin returns and empty string when both players have cards", () => {
     const game = initializeGame(["p1", "p2"])
 
-    expect(checkWin(game)).toBeNull()
+    expect(checkWin(game)).toBe("")
 })
 
 test("checkWin throws an error when both players are out of cards", () => {
