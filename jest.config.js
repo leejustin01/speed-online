@@ -24,7 +24,10 @@ module.exports = {
     "^@game/game-engine/(.*)$": "<rootDir>/packages/game-engine/src/$1",
 
     "^@game/simulation$": "<rootDir>/packages/simulation/src/index.ts",
-    "^@game/simulation/(.*)$": "<rootDir>/packages/simulation/src/$1"
+    "^@game/simulation/(.*)$": "<rootDir>/packages/simulation/src/$1",
+
+    "^@game/protocol$": "<rootDir>/packages/protocol/src/index.ts",
+    "^@game/protocol/(.*)$": "<rootDir>/packages/protocol/src/$1"
   },
 
   // Transform TypeScript files

@@ -30,6 +30,23 @@ export function initializeGame(
     return gameState
 }
 
+export function setPlayerId(
+    state: GameState,
+    idx: number,
+    id: string
+): boolean {
+    if (idx !== 0 && idx !== 1) return false
+
+    const newState = cloneState(state)
+
+    const player = newState.players[idx]
+    if (!player) return false
+
+    player.id = id
+
+    return true
+}
+
 export function startGame(
     state: GameState
 ): GameState {
