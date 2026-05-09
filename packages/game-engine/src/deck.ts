@@ -57,8 +57,9 @@ export function dealCards(
     players: PlayerState[], 
     deck: Card[]
 ): {
-  players: PlayerState[]
-  drawPiles: Card[][]
+    players: PlayerState[]
+    drawPiles: Card[][],
+    playPiles: Card[][]
 } {
     let cardToBeDealt = 0
     const player1 = players[0]
@@ -75,10 +76,14 @@ export function dealCards(
     }
 
     const drawPiles: Card[][] = [[], []]
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
         drawPiles[0][i] = deck[cardToBeDealt++]
         drawPiles[1][i] = deck[cardToBeDealt++]
     }
 
-    return { players, drawPiles }
+    const playPiles: Card[][] =[[], []]
+    playPiles[0][0] = deck[cardToBeDealt++]
+    playPiles[1][0] = deck[cardToBeDealt++]
+
+    return { players, drawPiles, playPiles }
 }

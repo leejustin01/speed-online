@@ -12,6 +12,14 @@ export type ClientToServerEvents = {
         roomId: string
     }) => void
 
+    leave_room: (data: {
+        roomId: string
+    }) => void
+
+    start_game: (data: {
+        roomId: string
+    }) => void
+
     player_move: (data: PlayerMovePayload) => void
 }
 
@@ -24,11 +32,21 @@ export type ServerToClientEvents = {
         players: string[]
     }) => void
 
+    player_init: (data: {
+        playerIdx: number
+    }) => void
+
     state_update: (data: {
         state: GameState
     }) => void
 
     join_error: (error: string) => void
+
+    leave_error: (error: string) => void
+
+    join_success: () => void
+
+    leave_success: () => void
 
     player_left: (data: {
         playerId: string
@@ -38,7 +56,11 @@ export type ServerToClientEvents = {
 
     error_message: (message: string) => void
 
-    flip_cards_countdown: () => void
+    countdown_1: () => void
+
+    countdown_2: () => void
+
+    countdown_3: () => void
     
     game_over: (winner: string) => void
 }

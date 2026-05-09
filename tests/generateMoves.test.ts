@@ -1,10 +1,9 @@
-import { initializeGame, startGame } from "@game/game-engine"
+import { initializeGame } from "@game/game-engine"
 import { reducer } from "@game/game-engine"
 import { getValidMoves, getRandomValidMove } from "@game/simulation"
 
 test("getValidMoves only returns valid moves", () => {
     let state = initializeGame(["p1", "p2"])
-    state = startGame(state)
 
     const moves = getValidMoves(state, 0)
 
@@ -16,7 +15,6 @@ test("getValidMoves only returns valid moves", () => {
 
 test("getValidMoves returns a valid move set or empty", () => {
     let state = initializeGame(["p1", "p2"])
-    state = startGame(state)
 
     const moves = getValidMoves(state, 0)
 
@@ -25,7 +23,6 @@ test("getValidMoves returns a valid move set or empty", () => {
 
 test("CANNOT_PLAY only appears when no play moves exist", () => {
     let state = initializeGame(["p1", "p2"])
-    state = startGame(state)
 
     const moves = getValidMoves(state, 0)
 
@@ -39,7 +36,6 @@ test("CANNOT_PLAY only appears when no play moves exist", () => {
 
 test("getRandomValidMove returns only valid moves", () => {
     let state = initializeGame(["p1", "p2"])
-    state = startGame(state)
 
     for (let i = 0; i < 50; i++) {
         const move = getRandomValidMove(state, 0)

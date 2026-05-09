@@ -1,0 +1,85 @@
+.Board {
+    display: grid;
+
+    /* 4 columns: opp left, opp center, play center, opp right */
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+
+    /* 3 rows: opponent, play field, player */
+    grid-template-rows: auto 1fr auto;
+
+    gap: 20px;
+
+    height: 100vh;
+    width: 100%;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(circle at center, #1e293b 0%, #0f172a 70%);
+    
+}
+
+/* =========================
+   OPPONENT AREA (TOP ROW)
+   ========================= */
+
+.opp-side {
+    grid-column: 1 / -1;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 20px;
+}
+
+/* opponent hand + draw pile alignment */
+.opp-side {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* =========================
+   PLAY FIELD (MIDDLE ROW)
+   ========================= */
+
+.play-field {
+    grid-column: 1 / -1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 40px;
+}
+
+/* make piles feel centered like a table */
+.play-field > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================
+   PLAYER AREA (BOTTOM ROW)
+   ========================= */
+
+.my-side {
+    grid-column: 1 / -1;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    padding: 10px 20px;
+}
+
+/* =========================
+   OPTIONAL: TIGHTER CARD FEEL
+   ========================= */
+
+.my-side,
+.opp-side {
+    min-height: 180px;
+}

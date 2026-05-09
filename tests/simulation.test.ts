@@ -1,10 +1,9 @@
-import { reducer, initializeGame, startGame } from "@game/game-engine"
+import { reducer, initializeGame } from "@game/game-engine"
 import { getRandomValidMove } from "@game/simulation"
 
 test("simulation runs without invalid states or crashes", () => {
-    const state = initializeGame(["p1", "p2"])
+    let currentState = initializeGame(["p1", "p2"])
 
-    let currentState = startGame(state)
     let currentPlayer = 0
 
     for (let i = 0; i < 500; i++) {
@@ -59,7 +58,6 @@ test("game state contains no undefined cards", () => {
 test("engine is stable under long random simulation", () => {
     for (let game = 0; game < 50; game++) {
         let state = initializeGame(["p1", "p2"])
-        state = startGame(state)
         let currentPlayer = 0
 
         for (let i = 0; i < 1000; i++) {

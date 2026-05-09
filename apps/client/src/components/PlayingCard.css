@@ -1,0 +1,120 @@
+.card {
+    position: relative;
+
+    width: 120px;
+    height: 170px;
+
+    background: linear-gradient(to bottom, #fff, #f6f6f6);
+
+    border: 2px solid #1e1e1e;
+    border-radius: 14px;
+
+    box-shadow:
+        0 6px 14px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+    user-select: none;
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* hover effect */
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 12px 22px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* TOP LEFT CORNER */
+.card-corner-top {
+    position: absolute;
+
+    top: 10px;
+    left: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    line-height: 1;
+}
+
+/* rank (top-left) */
+.card-corner-rank {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* suit (top-left) */
+.card-corner-suit {
+    font-size: 1.1rem;
+}
+
+/* CENTER SUIT */
+.card-center {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-size: 3rem;
+}
+
+/* BOTTOM RIGHT CORNER (rotated like real cards) */
+.card-corner-bottom {
+    position: absolute;
+
+    bottom: 10px;
+    right: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    transform: rotate(180deg);
+
+    line-height: 1;
+}
+
+/* index badge */
+.card-index {
+    position: absolute;
+
+    top: -14px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    min-width: 28px;
+    height: 28px;
+
+    padding: 0 8px;
+
+    border-radius: 999px;
+
+    background: #111;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 0.85rem;
+    font-weight: bold;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+
+    pointer-events: none;
+}
+
+/* suit colors */
+.card.red {
+    color: #c62828;
+}
+
+.card.black {
+    color: #111;
+}

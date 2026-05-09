@@ -56,6 +56,22 @@ export function joinRoom(id: string, playerId: string) {
     return { room }
 }
 
+export function leaveRoom(id: string, playerId: string) {
+    const room = rooms.get(id)
+    if (!room) return { error: "ROOM_NOT_FOUND" }
+
+    const index = room.players.indexOf(playerId)
+    if (index === -1) return { error: "PLAYER_NOT_FOUND"}
+
+    room.players.splice(index, 1)
+    if (room.players.length === 0) {
+        rooms.delete(id)
+        return {}
+    }
+
+    return { room }
+}
+
 export function generateRoomCode(): string {
     return Math.floor(1000 + Math.random() * 9000).toString()
 }

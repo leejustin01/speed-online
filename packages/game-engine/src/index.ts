@@ -1,1 +1,1 @@
-export { reducer, initializeGame, startGame } from "./gameEngine"
+export { reducer, initializeGame } from "./gameEngine"
