@@ -1,6 +1,6 @@
 import { initializeGame, reducer } from "@game/game-engine"
 import { createCard } from "../packages/game-engine/src/deck"
-import { cloneState, initializePlayer, applyCannotPlay, applyDrawCard, applyPlayCard, startGame } from "../packages/game-engine/src/gameEngine"
+import { cloneState, initializePlayer, applyCannotPlay, applyDrawCard, applyPlayCard } from "../packages/game-engine/src/gameEngine"
 import { Move, PlayCardMove, DrawCardMove, CannotPlayMove } from "@game/types"
 
 test("initializePlayer generates an empty player state with given id", () => {
@@ -21,10 +21,11 @@ test("initializeGame generates a freshly dealt game state", () => {
     expect(gameState.players).toHaveLength(2)
     expect(gameState.players[0].id).toBe("test1")
     expect(gameState.players[1].id).toBe("test2")
-    expect(gameState.playPiles).toBeDefined()
-    expect(gameState.playPiles[0]).toBeDefined()
-    expect(gameState.drawPiles[0]).toHaveLength(6)
-    expect(gameState.status).toBe("in_progress")
+    expect(gameState.playPiles[0]).toHaveLength(1)
+    expect(gameState.playPiles[1]).toHaveLength(1)
+    expect(gameState.drawPiles[0]).toHaveLength(5)
+    expect(gameState.drawPiles[1]).toHaveLength(5)
+    expect(gameState.status).toBe("waiting")
 })
 
 test("initializeGame fails when given an empty playerIds array", () => {
@@ -37,23 +38,6 @@ test("initializeGame fails when given a 3-length playerIds array", () => {
     const ids = ["test1", "test2", "test3"]
 
     expect(() => { initializeGame(ids) }).toThrow()
-})
-
-test("startGame flips cards from draw pile", () => {
-    const state = initializeGame(["p1", "p2"])
-    const nextState = startGame(state)
-
-    expect(nextState.drawPiles[0].length).toBe(5)
-    expect(nextState.drawPiles[1].length).toBe(5)
-    expect(nextState.playPiles[0].length).toBe(1)
-    expect(nextState.playPiles[1].length).toBe(1)
-})
-
-test("startGame throws an error if draw piles are empty", () => {
-    const state = initializeGame(["p1", "p2"])
-    state.drawPiles = [[],[]]
-
-    expect(() => { startGame(state) }).toThrow()
 })
 
 test("cloneState creates a deep copy", () => {
@@ -117,7 +101,7 @@ test("applyPlayCard does not mutate original state", () => {
     applyPlayCard(state, move)
 
     expect(state.players[0].hand.length).toBe(6)
-    expect(state.playPiles[0].length).toBe(1)
+    expect(state.playPiles[0].length).toBe(2)
 })
 
 test("applyPlayCard returns an accurate finished game state when player 1 played their last card", () => {
@@ -230,8 +214,8 @@ test("applyCannotPlay flips piles when both players cannot play", () => {
     const result = applyCannotPlay(state, move)
 
     expect(result.message).toBe("FLIP_CARDS")
-    expect(result.state.playPiles[0].length).toBe(1)
-    expect(result.state.playPiles[1].length).toBe(1)
+    expect(result.state.playPiles[0].length).toBe(2)
+    expect(result.state.playPiles[1].length).toBe(2)
 })
 
 test("applyCannotPlay returns INVALID_MOVE when trying to flip cards from empty center draw piles", () => {
@@ -267,7 +251,7 @@ test("reducer calls applyPlayCard for PLAY_CARD", () => {
 
     const result = reducer(state, move)
 
-    expect(result.state.playPiles[0].length).toBe(2)
+    expect(result.state.playPiles[0].length).toBe(3)
 })
 
 test("reducer calls applyDrawCard for DRAW_CARD", () => {

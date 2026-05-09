@@ -18,19 +18,36 @@ export function initializeGame(
 
     const deck = shuffle(createDeck())
 
-    const { players, drawPiles } = dealCards([player1, player2], deck)
+    const { players, drawPiles, playPiles } = dealCards([player1, player2], deck)
 
     const gameState: GameState = {
         players: players,
-        playPiles: [[], []],
+        playPiles: playPiles,
         drawPiles: drawPiles,
-        status: "in_progress"
+        status: "waiting"
     }
 
     return gameState
 }
 
-export function startGame(
+export function setPlayerId(
+    state: GameState,
+    idx: number,
+    id: string
+): boolean {
+    if (idx !== 0 && idx !== 1) return false
+
+    const newState = cloneState(state)
+
+    const player = newState.players[idx]
+    if (!player) return false
+
+    player.id = id
+
+    return true
+}
+
+/*export function startGame(
     state: GameState
 ): GameState {
     const newState = cloneState(state)
@@ -46,7 +63,7 @@ export function startGame(
     newState.playPiles[1].push(card1)
 
     return newState
-}
+}*/
 
 export function initializePlayer(
     playerId: string

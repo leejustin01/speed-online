@@ -1,0 +1,68 @@
+.playpile {
+    width: 120px;
+    height: 170px;
+
+    perspective: 1000px;
+}
+
+/* inner wrapper that rotates */
+.playpile-inner {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    transform-style: preserve-3d;
+
+    transition: transform 0.6s ease;
+}
+
+/* flipped state */
+.playpile.flipped .playpile-inner {
+    transform: rotateY(180deg);
+}
+
+/* both sides */
+.playpile-front,
+.playpile-back {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    backface-visibility: hidden;
+
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* FRONT (face-up card) */
+.playpile-front {
+    background: white;
+    border: 2px solid #1e1e1e;
+
+    font-size: 3rem;
+}
+
+/* BACK (face-down card) */
+.playpile-back {
+    background: repeating-linear-gradient(
+        45deg,
+        #1e3a8a,
+        #1e3a8a 10px,
+        #1e40af 10px,
+        #1e40af 20px
+    );
+
+    border: 2px solid #1e1e1e;
+
+    color: white;
+    font-size: 2rem;
+
+    transform: rotateY(180deg);
+}
