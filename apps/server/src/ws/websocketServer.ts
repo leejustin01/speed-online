@@ -3,7 +3,6 @@ import { Server as HTTPServer } from "http"
 import { ClientToServerEvents, ServerToClientEvents } from "@game/protocol"
 import { generateRoomCode, createRoom, joinRoom, removePlayer, leaveRoom, getRoom } from "../roomState"
 import { onPlayerMove } from "./handlers/onPlayerMove"
-import { initializeGame } from "@game/game-engine"
 
 type IOServer = Server<ClientToServerEvents, ServerToClientEvents>
 
@@ -31,13 +30,7 @@ export function initWebSocket(httpServer: HTTPServer): IOServer {
                 socket.emit("error_message", "ROOM_NOT_FOUND")
                 return
             }
-            const playerIdx = room.players.indexOf(socket.id)
-            if (playerIdx === -1) {
-                console.log("===> Sending: error_message")
-                socket.emit("error_message", "PLAYER_NOT_FOUND")
-                return
-            }
-            socket.emit("player_init", { playerIdx: playerIdx })
+            
         })
 
         socket.on("join_room", (data) => {
@@ -61,14 +54,6 @@ export function initWebSocket(httpServer: HTTPServer): IOServer {
                 players: result.room.players
             })
 
-            const playerIdx = result.room.players.indexOf(socket.id)
-            if (playerIdx === -1) {
-                console.log("===> Sending: error_message")
-                socket.emit("error_message", "PLAYER_NOT_FOUND")
-                return
-            }
-
-            socket.emit("player_init", { playerIdx: playerIdx })
         })
 
         socket.on("start_game", (data) => {
@@ -79,6 +64,8 @@ export function initWebSocket(httpServer: HTTPServer): IOServer {
                 socket.emit("error_message", "ROOM_NOT_FOUND")
                 return
             }
+
+            room.state.status = "in_progress"
             io.to(data.roomId).emit("state_update", {
                 state: room.state
             })
@@ -102,8 +89,38 @@ export function initWebSocket(httpServer: HTTPServer): IOServer {
                     playerId: socket.id
                 })
             }
+        })
 
+        socket.on("get_players", (data) => {
+            console.log("<=== Received: get_players")
+            const room = getRoom(data.roomId)
+            if (!room) {
+                console.log("===> Sending: error_message")
+                socket.emit("error_message", "ROOM_NOT_FOUND")
+                return
+            }
+            console.log("===> Sending: players")
+            socket.emit("players", { players: room.players })
+        })
 
+        socket.on("init", (data) => {
+            console.log("<=== Received: init")
+            const room = getRoom(data.roomId)
+            if (!room) {
+                console.log("===> Sending: error_message")
+                socket.emit("error_message", "ROOM_NOT_FOUND")
+                return
+            }
+
+            const playerIdx = room.players.indexOf(socket.id)
+            if (playerIdx === -1) {
+                console.log("===> Sending: error_message")
+                socket.emit("error_message", "PLAYER_NOT_FOUND")
+                return
+            }
+
+            console.log("===> Sending: player_init")
+            socket.emit("player_init", { playerIdx: playerIdx })
         })
 
         socket.on("disconnect", (reason) => {

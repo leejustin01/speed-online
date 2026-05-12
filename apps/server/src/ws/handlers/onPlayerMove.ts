@@ -1,11 +1,10 @@
-import { reducer } from "@game/game-engine"
+import { reducer, cloneState } from "@game/game-engine"
 import { getRoom } from "../../roomState"
 
 import { TypedServer, TypedSocket } from "@game/types"
 import { PlayerMovePayload } from "@game/protocol"
-import { cloneState } from "packages/game-engine/src/gameEngine"
 
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 export async function onPlayerMove(
     io: TypedServer,
     socket: TypedSocket,
@@ -33,17 +32,17 @@ export async function onPlayerMove(
         return
     }
 
+    const tempState = cloneState(room.state)
     room.state = result.state
     
     if (result.message === "FLIP_CARDS") {
         room.isResolving = true
-        const tempState = cloneState(room.state)
+
         tempState.status = "waiting"
-        tempState.drawPiles[0].pop()
-        tempState.drawPiles[1].pop()
         io.to(roomId).emit("state_update", {
             state: tempState
         })
+
         console.log("===> Sending: countdown_3")
         io.to(roomId).emit("countdown_3")
         await delay(1000)
@@ -55,9 +54,9 @@ export async function onPlayerMove(
         await delay(1000)
         room.isResolving = false
     } else if (result.message === "GAME_OVER") {
-        if (!result.state.winner) {
+        if (result.state.winner === undefined) {
             console.log("===> Sending: error_message")
-            io.to(roomId).emit("error_message", "winner is undefined")
+            io.to(roomId).emit("error_message", "winner is undefined.")
             return
         }
         console.log("===> Sending: game_over")

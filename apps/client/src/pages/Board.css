@@ -1,10 +1,8 @@
 .Board {
     display: grid;
 
-    /* 4 columns: opp left, opp center, play center, opp right */
     grid-template-columns: 1fr 2fr 2fr 1fr;
 
-    /* 3 rows: opponent, play field, player */
     grid-template-rows: auto 1fr auto;
 
     gap: 20px;
@@ -14,14 +12,14 @@
 
     padding: 20px;
 
+    transition:
+        filter 0.4s ease,
+        opacity 0.4s ease;
+
     background:
         radial-gradient(circle at center, #1e293b 0%, #0f172a 70%);
     
 }
-
-/* =========================
-   OPPONENT AREA (TOP ROW)
-   ========================= */
 
 .opp-side {
     grid-column: 1 / -1;
@@ -33,16 +31,11 @@
     padding: 10px 20px;
 }
 
-/* opponent hand + draw pile alignment */
 .opp-side {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-/* =========================
-   PLAY FIELD (MIDDLE ROW)
-   ========================= */
 
 .play-field {
     grid-column: 1 / -1;
@@ -54,16 +47,11 @@
     gap: 40px;
 }
 
-/* make piles feel centered like a table */
 .play-field > * {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-/* =========================
-   PLAYER AREA (BOTTOM ROW)
-   ========================= */
 
 .my-side {
     grid-column: 1 / -1;
@@ -75,11 +63,150 @@
     padding: 10px 20px;
 }
 
-/* =========================
-   OPTIONAL: TIGHTER CARD FEEL
-   ========================= */
-
 .my-side,
 .opp-side {
     min-height: 180px;
+}
+
+.error-message {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 12px 24px;
+    border-radius: 8px;
+
+    background-color: rgb(220, 38, 38);
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    transform: translateY(-50%);
+
+    border-radius: 8px;
+
+    color: white;
+    font-weight: bold;
+    font-size: 100px;
+
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.game-over.show {
+    opacity: 1;
+}
+
+.game-over.hide {
+    opacity: 0;
+}
+
+.Board.over {
+    filter: brightness(0.45) blur(3px);
+}
+
+.Board {
+    position: relative;
+    overflow: hidden;
+}
+
+.board-content {
+    display: contents;
+}
+
+.board-content.over {
+    filter: brightness(0.35) blur(4px);
+    pointer-events: none;
+}
+
+.board-content.over .opp-side,
+.board-content.over .play-field,
+.board-content.over .my-side,
+.board-content.over .error-message {
+    filter: brightness(0.35) blur(4px);
+    transition:
+        filter 0.4s ease,
+        opacity 0.4s ease;
+}
+
+.game-over-overlay {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+
+    animation: fadeIn 0.35s ease;
+}
+
+.game-over-message {
+    padding: 30px 60px;
+
+    border-radius: 20px;
+
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.45);
+
+    color: white;
+    font-size: 96px;
+    font-weight: bold;
+}
+
+.return-home-button {
+    padding: 14px 28px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #3b82f6;
+    color: white;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.2s ease;
+}
+
+.return-home-button:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+}
+
+.return-home-button:active {
+    transform: scale(0.98);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

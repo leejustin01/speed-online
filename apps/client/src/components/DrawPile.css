@@ -1,0 +1,56 @@
+.drawpile {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+
+    border-radius: 14px;
+}
+
+.drawpile.clickable {
+    cursor: pointer;
+}
+
+.drawpile.clickable:hover {
+    transform: translateY(-4px) scale(1.02);
+
+    box-shadow:
+        0 0 18px rgba(59, 130, 246, 0.35),
+        0 8px 24px rgba(0,0,0,0.35);
+}
+
+.drawpile.clickable:active {
+    transform: scale(0.98);
+}
+
+.drawpile-count {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+
+    min-width: 32px;
+    height: 32px;
+
+    padding: 0 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    background: rgba(15, 23, 42, 0.95);
+    border: 2px solid rgba(255,255,255,0.12);
+
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.35);
+}

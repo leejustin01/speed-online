@@ -1,6 +1,6 @@
-import type { Card } from "@game/types";
+import { useDrag } from "react-dnd"
 
-import { useDrag } from "react-dnd";
+import type { Card } from "@game/types"
 
 import "./PlayingCard.css"
 
@@ -17,16 +17,31 @@ const rankLabels: Record<number, string> = {
     11: "Q",
     12: "K",
 }
-export default function PlayingCard({ card, index }: { card: Card, index?: number }) {
+
+type useStateSetter = React.Dispatch<React.SetStateAction<number | null>>
+
+export default function PlayingCard({ 
+    card, 
+    index, 
+    selected, 
+    setSelectedCardIdx 
+}: { 
+    card: Card, 
+    index?: number, 
+    selected: boolean, 
+    setSelectedCardIdx: useStateSetter
+}) {
+
     const [{isDragging}, drag] = useDrag(() => ({
         type: "card",
-        item: {
-            card
+        item: () => {
+            setSelectedCardIdx(null)
+            return { cardId: card.id }
         },
         collect: monitor => ({
-        isDragging: !!monitor.isDragging(),
+            isDragging: !!monitor.isDragging(),
         }),
-    }), [card])
+    }), [card.id])
 
     const isRed =
         card.suit === "hearts" ||
@@ -37,14 +52,15 @@ export default function PlayingCard({ card, index }: { card: Card, index?: numbe
     
     return (
         <div
-            className={`card ${isRed ? "red" : "black"}`}
+            className={`card ${isRed ? "red" : "black"} ${selected? "selected" : ""}`}
             ref={(node) => {
                 drag(node)
             }}
             style={{
                 opacity: isDragging ? 0.5 : 1,
-                cursor: "move",
+                cursor: isDragging ? "grabbing" : "grab",
             }}
+            onClick={() => setSelectedCardIdx(index !== undefined ? index - 1 : null)}
         >
             {index !== undefined && (
                 <div className="card-index">

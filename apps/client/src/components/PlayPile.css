@@ -5,7 +5,6 @@
     perspective: 1000px;
 }
 
-/* inner wrapper that rotates */
 .playpile-inner {
     width: 100%;
     height: 100%;
@@ -17,12 +16,10 @@
     transition: transform 0.6s ease;
 }
 
-/* flipped state */
 .playpile.flipped .playpile-inner {
     transform: rotateY(180deg);
 }
 
-/* both sides */
 .playpile-front,
 .playpile-back {
     position: absolute;
@@ -41,7 +38,6 @@
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
 }
 
-/* FRONT (face-up card) */
 .playpile-front {
     background: white;
     border: 2px solid #1e1e1e;
@@ -49,7 +45,6 @@
     font-size: 3rem;
 }
 
-/* BACK (face-down card) */
 .playpile-back {
     background: repeating-linear-gradient(
         45deg,
@@ -65,4 +60,8 @@
     font-size: 2rem;
 
     transform: rotateY(180deg);
+}
+
+.playpile.hovered {
+    transform: scale(1.05);
 }

@@ -200,28 +200,28 @@ test("isValidMove returns false for CANNOT_PLAY if player already cannot play", 
     expect(isValidMove(game, play)).toBe(false)
 })
 
-test("checkWin returns player1's id when player1 is out of cards", () => {
+test("checkWin returns index 0 when player1 is out of cards", () => {
     const game = initializeGame(["p1", "p2"])
 
     game.players[0].hand = []
     game.players[0].drawPile = []
 
-    expect(checkWin(game)).toBe("p1")
+    expect(checkWin(game)).toBe(0)
 })
 
-test("checkWin returns player2's id when player2 is out of cards", () => {
+test("checkWin returns index 1 when player2 is out of cards", () => {
     const game = initializeGame(["p1", "p2"])
 
     game.players[1].hand = []
     game.players[1].drawPile = []
 
-    expect(checkWin(game)).toBe("p2")
+    expect(checkWin(game)).toBe(1)
 })
 
-test("checkWin returns and empty string when both players have cards", () => {
+test("checkWin returns -1  when both players have cards", () => {
     const game = initializeGame(["p1", "p2"])
 
-    expect(checkWin(game)).toBe("")
+    expect(checkWin(game)).toBe(-1)
 })
 
 test("checkWin throws an error when both players are out of cards", () => {

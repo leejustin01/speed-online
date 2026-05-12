@@ -9,7 +9,6 @@
     justify-content: center;
 }
 
-/* The actual card */
 .card-back {
     width: 100%;
     height: 100%;
@@ -34,7 +33,6 @@
     position: relative;
 }
 
-/* Decorative inner border */
 .card-back::after {
     content: "";
 
@@ -49,7 +47,6 @@
     border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Count badge (draw pile / opponent pile) */
 .card-back-count {
     position: absolute;
 

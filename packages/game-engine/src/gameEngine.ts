@@ -1,5 +1,5 @@
 import { PlayerState, GameState, Move, Message, PlayCardMove, DrawCardMove, CannotPlayMove } from "@game/types"
-import { createDeck, shuffle, dealCards } from "./deck"
+import { createDeck, shuffle, dealCards, createCard } from "./deck"
 import { checkWin, isValidMove } from "./rules"
 
 /* Returns a game state that is ready for play
@@ -46,24 +46,6 @@ export function setPlayerId(
 
     return true
 }
-
-/*export function startGame(
-    state: GameState
-): GameState {
-    const newState = cloneState(state)
-    
-    const card0 = newState.drawPiles[0].pop()
-    const card1 = newState.drawPiles[1].pop()
-
-    if (!card0 || !card1) {
-        throw new Error("Game state initialized with empty draw piles.")
-    }
-
-    newState.playPiles[0].push(card0)
-    newState.playPiles[1].push(card1)
-
-    return newState
-}*/
 
 export function initializePlayer(
     playerId: string
@@ -132,7 +114,7 @@ export function applyPlayCard(
     player.hand.splice(cardIndex, 1)
 
     const winner = checkWin(newState)
-    if (winner !== "") {
+    if (winner !== -1) {
         newState.status = "finished"
         newState.winner = winner
         return { state: newState, message: "GAME_OVER" }
@@ -169,7 +151,9 @@ export function applyCannotPlay(
         const card1 = newState.drawPiles[1].pop()
 
         if (!card0 || !card1) {
-            return { state: newState, message: "INVALID_MOVE" }
+            newState.status = "finished"
+            newState.winner = 2
+            return { state: newState, message: "GAME_OVER" }
         }
 
         newState.playPiles[0].push(card0)

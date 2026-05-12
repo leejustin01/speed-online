@@ -1,7 +1,24 @@
-import CardBack from "./CardBack";
+import CardBack from "./CardBack"
+import "./DrawPile.css"
 
-export default function DrawPile({ count }: { count: number }) {
+export default function DrawPile({
+    count,
+    handleDraw
+}: {
+    count: number,
+    handleDraw?: () => void
+}) {
+
     return (
-        <CardBack count={count} />
+        <div
+            className={`drawpile ${handleDraw ? "clickable" : ""}`}
+            onClick={handleDraw}
+        >
+            <CardBack />
+
+            <div className="drawpile-count">
+                {count}
+            </div>
+        </div>
     )
 }
