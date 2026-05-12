@@ -1,8 +1,5 @@
 import type { Card } from "@game/types";
-
-import { useDrag } from "react-dnd";
-
-import "./PlayingCard.css"
+import "./PileCard.css"
 
 const suitSymbols: Record<Card["suit"], string> = {
     hearts: "♥",
@@ -17,18 +14,7 @@ const rankLabels: Record<number, string> = {
     11: "Q",
     12: "K",
 }
-export default function PlayingCard({ card, index, selected, setSelectedCardIdx }: { card: Card, index?: number, selected: boolean, setSelectedCardIdx: React.Dispatch<React.SetStateAction<number | null>>}) {
-    const [{isDragging}, drag] = useDrag(() => ({
-        type: "card",
-        item: () => {
-            setSelectedCardIdx(null)
-            return { cardId: card.id }
-        },
-        collect: monitor => ({
-            isDragging: !!monitor.isDragging(),
-        }),
-    }), [card.id])
-
+export default function PileCard({ card }: { card: Card }) {
     const isRed =
         card.suit === "hearts" ||
         card.suit === "diamonds"
@@ -38,22 +24,8 @@ export default function PlayingCard({ card, index, selected, setSelectedCardIdx 
     
     return (
         <div
-            className={`card ${isRed ? "red" : "black"} ${selected? "selected" : ""}`}
-            ref={(node) => {
-                drag(node)
-            }}
-            style={{
-                opacity: isDragging ? 0.5 : 1,
-                cursor: isDragging ? "grabbing" : "grab",
-            }}
-            onClick={() => setSelectedCardIdx(index !== undefined ? index : null)}
+            className={`pile-card ${isRed ? "red" : "black"}`}
         >
-            {index !== undefined && (
-                <div className="card-index">
-                    {index}
-                </div>
-            )}
-
             <div className="card-corner-top">
                 <div className="card-corner-rank">
                     {rank}

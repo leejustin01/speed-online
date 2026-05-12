@@ -47,24 +47,6 @@ export function setPlayerId(
     return true
 }
 
-/*export function startGame(
-    state: GameState
-): GameState {
-    const newState = cloneState(state)
-    
-    const card0 = newState.drawPiles[0].pop()
-    const card1 = newState.drawPiles[1].pop()
-
-    if (!card0 || !card1) {
-        throw new Error("Game state initialized with empty draw piles.")
-    }
-
-    newState.playPiles[0].push(card0)
-    newState.playPiles[1].push(card1)
-
-    return newState
-}*/
-
 export function initializePlayer(
     playerId: string
 ): PlayerState {
@@ -169,7 +151,8 @@ export function applyCannotPlay(
         const card1 = newState.drawPiles[1].pop()
 
         if (!card0 || !card1) {
-            return { state: newState, message: "INVALID_MOVE" }
+            newState.status = "finished"
+            return { state: newState, message: "GAME_OVER" }
         }
 
         newState.playPiles[0].push(card0)

@@ -20,6 +20,10 @@ export type ClientToServerEvents = {
         roomId: string
     }) => void
 
+    get_players: (data: {
+        roomId: string
+    }) => void
+
     player_move: (data: PlayerMovePayload) => void
 }
 
@@ -29,6 +33,10 @@ export type ServerToClientEvents = {
     }) => void
 
     player_joined: (data: {
+        players: string[]
+    }) => void
+
+    lobby_update: (data: {
         players: string[]
     }) => void
 
@@ -52,6 +60,11 @@ export type ServerToClientEvents = {
         playerId: string
     }) => void
 
+    players: (data: {
+        players: string[]
+    }) => void
+    
+
     invalid_move: () => void
 
     error_message: (message: string) => void
@@ -62,5 +75,5 @@ export type ServerToClientEvents = {
 
     countdown_3: () => void
     
-    game_over: (winner: string) => void
+    game_over: (winner: string | "tie") => void
 }

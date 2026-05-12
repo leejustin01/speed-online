@@ -37,6 +37,7 @@ export function initWebSocket(httpServer: HTTPServer): IOServer {
                 socket.emit("error_message", "PLAYER_NOT_FOUND")
                 return
             }
+            console.log("===> Sending: player_init")
             socket.emit("player_init", { playerIdx: playerIdx })
         })
 
@@ -79,6 +80,8 @@ export function initWebSocket(httpServer: HTTPServer): IOServer {
                 socket.emit("error_message", "ROOM_NOT_FOUND")
                 return
             }
+
+            room.state.status = "in_progress"
             io.to(data.roomId).emit("state_update", {
                 state: room.state
             })
@@ -102,8 +105,18 @@ export function initWebSocket(httpServer: HTTPServer): IOServer {
                     playerId: socket.id
                 })
             }
+        })
 
-
+        socket.on("get_players", (data) => {
+            console.log("<=== Received: get_players")
+            const room = getRoom(data.roomId)
+            if (!room) {
+                console.log("===> Sending: error_message")
+                socket.emit("error_message", "ROOM_NOT_FOUND")
+                return
+            }
+            console.log("===> Sending: players")
+            socket.emit("players", { players: room.players })
         })
 
         socket.on("disconnect", (reason) => {

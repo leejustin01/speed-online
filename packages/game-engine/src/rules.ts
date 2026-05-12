@@ -40,8 +40,7 @@ export function isValidMove(
         }
         case "CANNOT_PLAY": {
             const player = gameState.players[move.playerIndex]
-            if (!player.canPlay) return false
-            return gameState.drawPiles[0].length > 0 && gameState.drawPiles[1].length > 0
+            return player.canPlay
         }
     }
 }

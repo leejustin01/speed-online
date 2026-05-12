@@ -1,7 +1,7 @@
 import CardBack from "./CardBack";
 
-export default function DrawPile({ count }: { count: number }) {
+export default function DrawPile({ count, handleDraw }: { count: number, handleDraw?: () => void }) {
     return (
-        <CardBack count={count} />
+        <CardBack count={count} handleDraw={handleDraw}/>
     )
 }
