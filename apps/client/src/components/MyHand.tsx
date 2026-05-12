@@ -3,7 +3,18 @@ import PlayingCard from "./PlayingCard";
 
 import "./Hand.css"
 
-export default function MyHand({ hand, selectedCardIdx, setSelectedCardIdx }: { hand: Card[], selectedCardIdx: number | null, setSelectedCardIdx: React.Dispatch<React.SetStateAction<number | null>>}) {
+type useStateSetter = React.Dispatch<React.SetStateAction<number | null>>
+
+export default function MyHand({ 
+    hand, 
+    selectedCardIdx, 
+    setSelectedCardIdx 
+}: { 
+    hand: Card[], 
+    selectedCardIdx: number | null, 
+    setSelectedCardIdx: useStateSetter
+}) {
+
     return (
         <ul className="hand">
             {hand?.map((card, i) => (

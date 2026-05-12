@@ -1,10 +1,23 @@
-import type { Card } from "@game/types";
-import { useDrop } from "react-dnd";
-import CardBack from "./CardBack";
-import "./PlayPile.css";
-import PileCard from "./PileCard";
+import { useDrop } from "react-dnd"
 
-export default function PlayPile({ faceUp, topCard, pileIdx, handlePlay }: { faceUp: boolean, topCard: Card, pileIdx: number, handlePlay: (pileIdx: number, cardId?: string) => void }) {
+import type { Card } from "@game/types"
+
+import CardBack from "./CardBack"
+import PileCard from "./PileCard"
+
+import "./PlayPile.css"
+
+export default function PlayPile({ 
+    faceUp, 
+    topCard, 
+    pileIdx, 
+    handlePlay 
+}: { 
+    faceUp: boolean, 
+    topCard: Card, 
+    pileIdx: number, 
+    handlePlay: (pileIdx: number, cardId?: string) => void 
+}) {
 
     const [{ isOver }, drop ] = useDrop(() => ({
         accept: "card",
@@ -16,7 +29,7 @@ export default function PlayPile({ faceUp, topCard, pileIdx, handlePlay }: { fac
 
     return (
         <div 
-            className={`playpile ${faceUp ? "" : "flipped"}`}
+            className={`playpile ${faceUp ? "" : "flipped"} ${isOver ? "hovered" : ""}`}
             ref={(node) => {
                 drop(node)
             }}

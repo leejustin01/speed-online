@@ -1,6 +1,6 @@
 import { initializeGame } from "@game/game-engine"
 import { GameState } from "@game/types"
-import { setPlayerId } from "packages/game-engine/src/gameEngine"
+import { setPlayerId } from "@game/game-engine"
 
 type Room = {
     id: string

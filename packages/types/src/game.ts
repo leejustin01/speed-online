@@ -18,7 +18,7 @@ export type GameState = {
   playPiles: Card[][]
   drawPiles: Card[][]
   status: "waiting" | "in_progress" | "finished"
-  winner?: string
+  winner?: number
 }
 
 export type Move =

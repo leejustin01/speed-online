@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
-import { socket } from "../socket";
+import { useEffect, useState } from "react"
 
-import type { GameState } from "@game/types";
-import Board from "./Board";
-import "./Room.css";
+import type { GameState } from "@game/types"
+import { socket } from "../socket"
+
+import Board from "./Board"
+
+import "./Room.css"
+
 
 export default function Room({
     roomId,
@@ -47,6 +50,7 @@ export default function Room({
         socket.on("players", handlePlayers)
 
         socket.emit("get_players", { roomId: roomId })
+        socket.emit("init", { roomId: roomId })
 
         return () => {
             socket.off("state_update", handleState)
@@ -66,7 +70,7 @@ export default function Room({
     }
 
     if (game) {
-        return <Board game={game} playerIdx={playerIdx} roomId={roomId} />
+        return <Board game={game} playerIdx={playerIdx} roomId={roomId} onLeave={onLeave}/>
     }
 
     return (
@@ -89,7 +93,7 @@ export default function Room({
                 </div>
 
                 <div className="room-buttons">
-                    <button onClick={startGame}>
+                    <button disabled={players !== 2} onClick={startGame}>
                         Start Game
                     </button>
 

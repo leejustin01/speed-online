@@ -18,7 +18,6 @@
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* hover effect */
 .card:hover {
     transform: translateY(-6px);
     box-shadow:
@@ -26,7 +25,6 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* TOP LEFT CORNER */
 .card-corner-top {
     position: absolute;
 
@@ -40,18 +38,15 @@
     line-height: 1;
 }
 
-/* rank (top-left) */
 .card-corner-rank {
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-/* suit (top-left) */
 .card-corner-suit {
     font-size: 1.1rem;
 }
 
-/* CENTER SUIT */
 .card-center {
     position: absolute;
 
@@ -63,7 +58,6 @@
     font-size: 3rem;
 }
 
-/* BOTTOM RIGHT CORNER (rotated like real cards) */
 .card-corner-bottom {
     position: absolute;
 
@@ -79,7 +73,6 @@
     line-height: 1;
 }
 
-/* index badge */
 .card-index {
     position: absolute;
 
@@ -110,7 +103,6 @@
     pointer-events: none;
 }
 
-/* suit colors */
 .card.red {
     color: #c62828;
 }

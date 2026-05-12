@@ -1,1 +1,1 @@
-export { reducer, initializeGame } from "./gameEngine"
+export { reducer, initializeGame, setPlayerId, cloneState } from "./gameEngine"

@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
+
 import { socket } from "../socket"
+
 import "./StuckButton.css"
 
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+
 export default function StuckButton({ handleStuck }: { handleStuck: () => void }) {
     const [ on, setOn ] = useState(true)
 

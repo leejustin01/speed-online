@@ -47,14 +47,14 @@ export function isValidMove(
 
 export function checkWin(
     gameState: GameState
-): string {
+): number {
     const p1Finished = gameState.players[0].hand.length <= 0 && gameState.players[0].drawPile.length <= 0
     const p2Finished = gameState.players[1].hand.length <= 0 && gameState.players[1].drawPile.length <= 0
 
     if (p1Finished && p2Finished) throw new Error("Both players have no cards left.")
 
-    if (p1Finished) return gameState.players[0].id
-    if (p2Finished) return gameState.players[1].id
+    if (p1Finished) return 0
+    if (p2Finished) return 1
 
-    return ""
+    return -1
 }

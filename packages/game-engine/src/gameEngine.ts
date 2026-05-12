@@ -1,5 +1,5 @@
 import { PlayerState, GameState, Move, Message, PlayCardMove, DrawCardMove, CannotPlayMove } from "@game/types"
-import { createDeck, shuffle, dealCards } from "./deck"
+import { createDeck, shuffle, dealCards, createCard } from "./deck"
 import { checkWin, isValidMove } from "./rules"
 
 /* Returns a game state that is ready for play
@@ -114,7 +114,7 @@ export function applyPlayCard(
     player.hand.splice(cardIndex, 1)
 
     const winner = checkWin(newState)
-    if (winner !== "") {
+    if (winner !== -1) {
         newState.status = "finished"
         newState.winner = winner
         return { state: newState, message: "GAME_OVER" }
@@ -152,6 +152,7 @@ export function applyCannotPlay(
 
         if (!card0 || !card1) {
             newState.status = "finished"
+            newState.winner = 2
             return { state: newState, message: "GAME_OVER" }
         }
 

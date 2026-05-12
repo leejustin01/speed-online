@@ -18,7 +18,6 @@
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* TOP LEFT CORNER */
 .card-corner-top {
     position: absolute;
 
@@ -32,18 +31,15 @@
     line-height: 1;
 }
 
-/* rank (top-left) */
 .card-corner-rank {
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-/* suit (top-left) */
 .card-corner-suit {
     font-size: 1.1rem;
 }
 
-/* CENTER SUIT */
 .card-center {
     position: absolute;
 
@@ -55,7 +51,6 @@
     font-size: 3rem;
 }
 
-/* BOTTOM RIGHT CORNER (rotated like real cards) */
 .card-corner-bottom {
     position: absolute;
 
@@ -71,7 +66,6 @@
     line-height: 1;
 }
 
-/* suit colors */
 .pile-card.red {
     color: #c62828;
 }

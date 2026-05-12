@@ -125,7 +125,7 @@ test("applyPlayCard returns an accurate finished game state when player 1 played
 
     expect(result.message).toBe("GAME_OVER")
     expect(result.state.status).toBe("finished")
-    expect(result.state.winner).toBe("p1")
+    expect(result.state.winner).toBe(0)
 })
 
 test("applyPlayCard returns an accurate finished game state when player 2 played their last card", () => {
@@ -149,7 +149,7 @@ test("applyPlayCard returns an accurate finished game state when player 2 played
 
     expect(result.message).toBe("GAME_OVER")
     expect(result.state.status).toBe("finished")
-    expect(result.state.winner).toBe("p2")
+    expect(result.state.winner).toBe(1)
 })
 
 test("applyDrawCard moves card from drawPile to hand", () => {
@@ -218,7 +218,7 @@ test("applyCannotPlay flips piles when both players cannot play", () => {
     expect(result.state.playPiles[1].length).toBe(2)
 })
 
-test("applyCannotPlay returns INVALID_MOVE when trying to flip cards from empty center draw piles", () => {
+test("applyCannotPlay returns GAME_OVER when trying to flip cards from empty center draw piles", () => {
     const state = initializeGame(["p1", "p2"])
 
     state.drawPiles = [[],[]]
@@ -231,7 +231,7 @@ test("applyCannotPlay returns INVALID_MOVE when trying to flip cards from empty 
 
     const result = applyCannotPlay(state, move)
 
-    expect(result.message).toBe("INVALID_MOVE")
+    expect(result.message).toBe("GAME_OVER")
 })
 
 test("reducer calls applyPlayCard for PLAY_CARD", () => {

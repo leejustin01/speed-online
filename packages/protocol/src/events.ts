@@ -24,6 +24,10 @@ export type ClientToServerEvents = {
         roomId: string
     }) => void
 
+    init: (data: {
+        roomId: string
+    }) => void
+
     player_move: (data: PlayerMovePayload) => void
 }
 
@@ -75,5 +79,5 @@ export type ServerToClientEvents = {
 
     countdown_3: () => void
     
-    game_over: (winner: string | "tie") => void
+    game_over: (winner: number) => void
 }

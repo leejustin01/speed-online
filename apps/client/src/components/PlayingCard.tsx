@@ -1,6 +1,6 @@
-import type { Card } from "@game/types";
+import { useDrag } from "react-dnd"
 
-import { useDrag } from "react-dnd";
+import type { Card } from "@game/types"
 
 import "./PlayingCard.css"
 
@@ -17,7 +17,21 @@ const rankLabels: Record<number, string> = {
     11: "Q",
     12: "K",
 }
-export default function PlayingCard({ card, index, selected, setSelectedCardIdx }: { card: Card, index?: number, selected: boolean, setSelectedCardIdx: React.Dispatch<React.SetStateAction<number | null>>}) {
+
+type useStateSetter = React.Dispatch<React.SetStateAction<number | null>>
+
+export default function PlayingCard({ 
+    card, 
+    index, 
+    selected, 
+    setSelectedCardIdx 
+}: { 
+    card: Card, 
+    index?: number, 
+    selected: boolean, 
+    setSelectedCardIdx: useStateSetter
+}) {
+
     const [{isDragging}, drag] = useDrag(() => ({
         type: "card",
         item: () => {
@@ -46,7 +60,7 @@ export default function PlayingCard({ card, index, selected, setSelectedCardIdx 
                 opacity: isDragging ? 0.5 : 1,
                 cursor: isDragging ? "grabbing" : "grab",
             }}
-            onClick={() => setSelectedCardIdx(index !== undefined ? index : null)}
+            onClick={() => setSelectedCardIdx(index !== undefined ? index - 1 : null)}
         >
             {index !== undefined && (
                 <div className="card-index">

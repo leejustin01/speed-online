@@ -1,4 +1,4 @@
-import type { Card } from "@game/types";
+import type { Card } from "@game/types"
 import "./PileCard.css"
 
 const suitSymbols: Record<Card["suit"], string> = {

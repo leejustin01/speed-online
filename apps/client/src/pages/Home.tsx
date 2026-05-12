@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { socket } from "../socket";
+import { useEffect, useState } from "react"
+
+import { socket } from "../socket"
 
 import "./Home.css"
 

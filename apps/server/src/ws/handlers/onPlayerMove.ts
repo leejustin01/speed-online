@@ -1,9 +1,8 @@
-import { reducer } from "@game/game-engine"
+import { reducer, cloneState } from "@game/game-engine"
 import { getRoom } from "../../roomState"
 
 import { TypedServer, TypedSocket } from "@game/types"
 import { PlayerMovePayload } from "@game/protocol"
-import { cloneState } from "packages/game-engine/src/gameEngine"
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 export async function onPlayerMove(
@@ -55,9 +54,9 @@ export async function onPlayerMove(
         await delay(1000)
         room.isResolving = false
     } else if (result.message === "GAME_OVER") {
-        if (!result.state.winner) {
-            console.log("===> Sending: game_over (tie)")
-            io.to(roomId).emit("game_over", "tie")
+        if (result.state.winner === undefined) {
+            console.log("===> Sending: error_message")
+            io.to(roomId).emit("error_message", "winner is undefined.")
             return
         }
         console.log("===> Sending: game_over")
