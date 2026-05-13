@@ -1,6 +1,6 @@
 import { Server } from "socket.io"
 import { Server as HTTPServer } from "http"
-import { ClientToServerEvents, ServerToClientEvents } from "@game/protocol"
+import { ClientToServerEvents, ServerToClientEvents } from "@game/types"
 import { generateRoomCode, createRoom, joinRoom, removePlayer, leaveRoom, getRoom } from "../roomState"
 import { onPlayerMove } from "./handlers/onPlayerMove"
 

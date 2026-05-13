@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io"
 import {
   ClientToServerEvents,
   ServerToClientEvents
-} from "@game/protocol"
+} from "./protocol"
 
 export type TypedServer = Server<
   ClientToServerEvents,

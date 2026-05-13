@@ -1,8 +1,7 @@
 import { reducer, cloneState } from "@game/game-engine"
 import { getRoom } from "../../roomState"
 
-import { TypedServer, TypedSocket } from "@game/types"
-import { PlayerMovePayload } from "@game/protocol"
+import { TypedServer, TypedSocket, PlayerMovePayload } from "@game/types"
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 export async function onPlayerMove(
