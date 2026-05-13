@@ -17,17 +17,14 @@ module.exports = {
 
   // Module path aliases (IMPORTANT for your shared types)
   moduleNameMapper: {
-    "^@game/types$": "<rootDir>/packages/shared-types/src/index.ts",
-    "^@game/types/(.*)$": "<rootDir>/packages/shared-types/src/$1",
+    "^@game/types$": "<rootDir>/packages/types/src/index.ts",
+    "^@game/types/(.*)$": "<rootDir>/packages/types/src/$1",
 
     "^@game/game-engine$": "<rootDir>/packages/game-engine/src/index.ts",
     "^@game/game-engine/(.*)$": "<rootDir>/packages/game-engine/src/$1",
 
     "^@game/simulation$": "<rootDir>/packages/simulation/src/index.ts",
     "^@game/simulation/(.*)$": "<rootDir>/packages/simulation/src/$1",
-
-    "^@game/protocol$": "<rootDir>/packages/protocol/src/index.ts",
-    "^@game/protocol/(.*)$": "<rootDir>/packages/protocol/src/$1"
   },
 
   // Transform TypeScript files

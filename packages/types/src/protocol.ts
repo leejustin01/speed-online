@@ -1,4 +1,4 @@
-import { Move, GameState } from "@game/types"
+import type { Move, GameState } from "./game"
 
 export type PlayerMovePayload = {
     roomId: string,
