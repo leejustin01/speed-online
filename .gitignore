@@ -11,3 +11,5 @@ dist/
 *.d.ts.map
 
 tsconfig.tsbuildinfo
+
+.env

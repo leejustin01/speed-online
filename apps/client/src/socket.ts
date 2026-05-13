@@ -8,4 +8,4 @@ import type {
 export const socket: Socket<
   ServerToClientEvents,
   ClientToServerEvents
-> = io("http://localhost:3000")
+> = io(import.meta.env.VITE_SERVER_URL)
