@@ -14,7 +14,7 @@
   "scripts": {
     "test": "jest",
     "test:ci": "jest --ci --coverage",
-    "build": "tsc -b"
+    "build": "npm run build --workspace=apps/server"
   },
   "repository": {
     "type": "git",
