@@ -20,6 +20,9 @@ module.exports = {
     "^@game/types$": "<rootDir>/packages/types/src/index.ts",
     "^@game/types/(.*)$": "<rootDir>/packages/types/src/$1",
 
+    "^@game/protocol$": "<rootDir>/packages/protocol/src/index.ts",
+    "^@game/protocol/(.*)$": "<rootDir>/packages/protocol/src/$1",
+
     "^@game/game-engine$": "<rootDir>/packages/game-engine/src/index.ts",
     "^@game/game-engine/(.*)$": "<rootDir>/packages/game-engine/src/$1",
 
