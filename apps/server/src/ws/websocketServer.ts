@@ -8,7 +8,10 @@ type IOServer = Server<ClientToServerEvents, ServerToClientEvents>
 
 export function initWebSocket(httpServer: HTTPServer): IOServer {
     const io: IOServer = new Server(httpServer, {
-        cors: { origin: "*" }
+        cors: { 
+            origin: "https://speed-online.pages.dev", "http://localhost:5173",
+            methods: ["GET", "POST"] 
+        }
     })
 
     io.on("connection", (socket) => {
