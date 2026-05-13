@@ -8,6 +8,7 @@
       "@game/simulation": ["packages/simulation/src/index.ts"],
     },
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop": true
   }
 }
