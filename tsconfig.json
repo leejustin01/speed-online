@@ -2,12 +2,6 @@
   "compilerOptions": {
     "types": ["jest", "node"],
     "composite": true,
-    "baseUrl": ".",
-    "paths": {
-      "@game/types": ["packages/types/src/index.ts"],
-      "@game/game-engine": ["packages/game-engine/src/index.ts"],
-      "@game/simulation": ["packages/simulation/src/index.ts"],
-    },
     "strict": true,
     "skipLibCheck": true,
     "esModuleInterop": true
